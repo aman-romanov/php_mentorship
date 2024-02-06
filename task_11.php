@@ -44,6 +44,12 @@ session_start();
                                         </div>
                                         <?php session_unset(); ?>
                                     <?php endif;?>
+                                    <?php if(!empty($_SESSION['success'])): ?>
+                                        <div class="alert alert-success fade show" role="alert">
+                                            <?=$_SESSION['success'];?>
+                                        </div>
+                                        <?php session_unset(); ?>
+                                    <?php endif;?>
                                     <form action="includes/processor_11.php" method="post">
                                         <label class="form-label" for="simpleinput">Text</label>
                                         <input type="text" id="simpleinput" name="simpleinput" class="form-control">

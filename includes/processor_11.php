@@ -38,6 +38,8 @@
 
             $stmt->execute();
 
+            $_SESSION['success'] = 'Запись добавлена';
+
             redirect('/marlin/20_tasks/task_11.php');
         }else{
             $_SESSION['error'] = 'Запись дублируется';
