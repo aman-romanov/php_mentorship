@@ -44,7 +44,7 @@
                                         </div>
                                     <?php endif;?>
                                     <?php if(isset($_SESSION['is_logged_in'])):?>
-                                        <?php if($_SESSION['is_logged_in'] = true):?>
+                                        <?php if($_SESSION['is_logged_in'] == true):?>
                                             <div class="alert alert-success fade show" role="alert">
                                                 Добро пожаловать!
                                             </div>

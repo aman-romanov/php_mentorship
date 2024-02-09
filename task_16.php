@@ -1,6 +1,4 @@
-<?php
-    session_start();
-?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,14 +35,14 @@
                         <div class="panel-content">
                             <div class="panel-content">
                                 <div class="form-group">
-                                    <div class="alert alert-info fade show" role="alert">
-                                        <div>Кнопка была нажата: <b><?php echo $_SESSION['click'] ?? 0;?></b> раз</div>
-                                    </div>
-                                    <form action="includes/processor_14.php">
-                                        <button class="btn btn-success mt-3">Нажать</button>
-                                    </form>
-                                    <form action="includes/unset_14.php">
-                                        <button class="btn btn-danger mt-3">Сбросить</button>
+                                    <?php if(isset($_SESSION['is_logged_in'])): ?>
+                                        <div class="alert alert-success fade show" role="alert">
+                                            Добро пожаловать!
+                                        </div>
+                                        <?php session_unset(); ?>
+                                    <?php endif;?>
+                                    <form action="includes/processor_16.php" method="post">
+                                        <button type="submit" class="btn btn-info">Выйти</button>
                                     </form>
                                 </div>
                             </div>
