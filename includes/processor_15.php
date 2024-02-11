@@ -16,12 +16,13 @@
         $stmt->execute();
         $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if($user > 0){
-            if(password_verify($password, $user[0]['password'])){
+            $hash = $user[0]['password'];
+            if(password_verify($password, $hash)){
                 $_SESSION['is_logged_in'] = true;
                 redirect('/marlin/20_tasks/task_16.php');
             }else{
                 $_SESSION['is_logged_in'] = false;
-                redirect('/marlin/20_tasks/task_16.php');
+                redirect('/marlin/20_tasks/task_15.php');
             }
         }else{
             $_SESSION['is_logged_in'] = false;
