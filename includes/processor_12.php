@@ -1,26 +1,15 @@
 <?php
     session_start();
     require 'redirect.php';
+    require 'database/pdo.php';
 
     if(empty($_POST["email"] || $_POST["password"])){
         $_SESSION['error'] = 'Введите почту и пароль';
         redirect('/marlin/20_tasks/task_12.php');
     } else {
-        $db_host = "localhost";
-        $db_name = "marlin_tasks";
-        $db_user = "tester";
-        $db_pass = "vOJ1Cls7Q52GTIaT";
-
-        $dsn = 'mysql:host=' . $db_host . ';dbname=' . $db_name . ';charset=utf8';
+        $conn = getPDO();
         $email = $_POST["email"];
         $password = $_POST["password"];
-        try {
-            $conn = new PDO($dsn, $db_user, $db_pass);
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e){
-            echo $e->getMessage();
-            exit;
-        }
         if(filter_var($email, FILTER_VALIDATE_EMAIL)){
             $sql = "SELECT *
                 FROM task_12

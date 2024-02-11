@@ -1,21 +1,9 @@
 <?php
     session_start();
     require "redirect.php";
+    require "database/pdo.php";
 
-    $db_host = "localhost";
-    $db_name = "marlin_tasks";
-    $db_user = "tester";
-    $db_pass = "vOJ1Cls7Q52GTIaT";
-
-    $dsn = 'mysql:host=' . $db_host . ';dbname=' . $db_name . ';charset=utf8';
-
-    try {
-        $conn = new PDO($dsn, $db_user, $db_pass);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch (PDOException $e){
-        echo $e->getMessage();
-        exit;
-    }
+    $conn = getPDO();
     $email = $_POST['email'];
     $password = $_POST['password'];
     

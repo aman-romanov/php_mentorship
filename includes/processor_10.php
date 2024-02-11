@@ -1,23 +1,12 @@
 <?php 
     require 'redirect.php';
+    require 'database/pdo.php';
 
     if(empty($_POST['simpleinput'])){
         echo "Введите текст";
     } else {
-        $db_host = "localhost";
-        $db_name = "marlin_tasks";
-        $db_user = "tester";
-        $db_pass = "vOJ1Cls7Q52GTIaT";
-
-        $dsn = 'mysql:host=' . $db_host . ';dbname=' . $db_name . ';charset=utf8';
+        $conn = getPDO();
         $text = $_POST['simpleinput'];
-        try {
-        } catch (PDOException $e){
-            echo $e->getMessage();
-            exit;
-        }
-        $conn = new PDO($dsn, $db_user, $db_pass);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql = "INSERT INTO task_10 (text)
             VALUES (:text)";
 

@@ -1,5 +1,5 @@
 <?php
-    require "includes/db.php";
+    require "includes/database/db.php";
 
     $conn = getDB();
 

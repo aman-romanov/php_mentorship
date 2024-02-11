@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    require 'includes/database/pdo.php';
+    require 'includes/database/getImage.php';
+
+    $conn = getPDO();
+    $images = getImage($conn);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,10 +45,22 @@
                             <div class="panel-content">
                                 <div class="panel-content">
                                     <div class="form-group">
-                                        <form action="">
+                                        <?php if(isset($_SESSION['error'])):?>
+                                            <div class="alert alert-danger fade show" role="alert">
+                                                <?=$_SESSION['error'];?>
+                                                <?php session_unset(); ?>
+                                            </div>
+                                        <?php endif;?>
+                                        <?php if(isset($_SESSION['success'])):?>
+                                            <div class="alert alert-success fade show" role="alert">
+                                                <?=$_SESSION['success'];?>
+                                            </div>
+                                            <?php session_unset(); ?>
+                                        <?php endif;?>
+                                        <form action="includes/processor_19.php" enctype="multipart/form-data" method="post">
                                             <div class="form-group">
                                                 <label class="form-label" for="simpleinput">Image</label>
-                                            <input type="file" id="simpleinput" class="form-control">
+                                            <input name="images[]" type="file" id="simpleinput" class="form-control" multiple>
                                             </div>
                                             <button class="btn btn-success mt-3">Submit</button>
                                         </form>
@@ -66,17 +86,11 @@
                             <div class="panel-content">
                                 <div class="panel-content image-gallery">
                                     <div class="row">
-                                        <div class="col-md-3 image">
-                                            <img src="img/demo/gallery/1.jpg">
-                                        </div>
-
-                                        <div class="col-md-3 image">
-                                            <img src="img/demo/gallery/2.jpg">
-                                        </div>
-
-                                        <div class="col-md-3 image">
-                                            <img src="img/demo/gallery/3.jpg">
-                                        </div>
+                                        <?php foreach($images as $image): ?>
+                                            <div class="col-md-3 image">
+                                                <img src="img/uploads/<?=$image['img'];?>">
+                                            </div>
+                                        <?php endforeach; ?>
                                     </div>
                                 </div>
                             </div>
