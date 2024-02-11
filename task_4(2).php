@@ -1,6 +1,7 @@
 <?php
     $directory = "img/demo/gallery/";
-    $images = array_diff(scandir($directory), array('..', '.'));
+    $img = scandir($directory, SCANDIR_SORT_ASCENDING);
+    $images = array_diff($img, array('..', '.'));
 ?>
 
 <!DOCTYPE html>

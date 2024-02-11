@@ -24,9 +24,10 @@
                     VALUES (:email, :password)";
 
                 $stmt = $conn->prepare($sql);
-
+                $hash = password_hash($password, PASSWORD_DEFAULT);
+                
                 $stmt->bindValue(':email', $email, PDO::PARAM_STR);
-                $stmt->bindValue(':password', $password, PDO::PARAM_STR);
+                $stmt->bindValue(':password', $hash, PDO::PARAM_STR);
 
                 $stmt->execute();
 
